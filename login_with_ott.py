@@ -24,7 +24,7 @@ def login(client,consumer_key,access_token,app_id,user_id,password):
 
 def get_margin(client):
     headers={'accept':'application/json','consumerKey':f"{client.consumer_key}",'Authorization':"Bearer "+client.access_token,"sessionToken":f"{client.session_token}"}
-    api_response= requests.get("https://tradeapi.kotaksecurities.com/apim/margin/1.0/margin",headers=headers).text
+    api_response= requests.get("https://tradeapi.kotaksecurities.com/apim/margin/1.0/margin",headers=headers).json()
     print(api_response)
     return api_response
 

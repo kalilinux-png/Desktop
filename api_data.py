@@ -1,0 +1,6 @@
+access_token = '''access_token'''
+consumer_key = '''consumerkey'''
+user_id = ''
+ip = '127.0.0.1'
+app_id = ''
+password = ''
