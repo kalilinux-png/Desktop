@@ -4,12 +4,6 @@ from api_data import *
 from ks_api_client import ks_api
 
 
-# consumer_key = ""
-# access_token=''
-# ip=''
-# app_id=''
-# user_id=''
-# password=''
 
 client = ks_api.KSTradeApi(access_token, user_id, consumer_key, ip, app_id)
 
@@ -24,8 +18,15 @@ def login(client,consumer_key,access_token,app_id,user_id,password):
     data = json.dumps({"userid":user_id})
     resp = requests.post(url, headers=headers, data=data).json()
     client.session_token=resp['success']['sessionToken']
+    print("Session Token ",client.session_token)
     print("Loged In  Successfully")
     return client
 
+def get_margin(client):
+    headers={'accept':'application/json','consumerKey':f"{client.consumer_key}",'Authorization':"Bearer "+client.access_token,"sessionToken":f"{client.session_token}"}
+    api_response= requests.get("https://tradeapi.kotaksecurities.com/apim/margin/1.0/margin",headers=headers).text
+    print(api_response)
+    return api_response
+
 login(client,consumer_key,access_token,app_id,user_id,password)
-print(client.order_report())
+get_margin(client)
